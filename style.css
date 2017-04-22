@@ -2,16 +2,58 @@
   box-sizing: border-box;
 }
 
-template {
-  display: none;
-}
-
 html {
   font-size: 13.333px;
   margin: 0;
-  /* min-width: 1024px; */
 }
 
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+a:visited {
+  color: #828282;
+}
+
+a:hover,
+a:active,
+a:focus {
+  text-decoration: underline;
+}
+
+#logout {
+  text-transform: lowercase;
+}
+
+.separator:after {
+  content: " |";
+  pointer-events: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+abbr {
+  outline: none;
+  text-decoration: none !important;
+}
+
+.sr-only, hr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* ///// */
 
 body {
   font-family: Verdana, Geneva, sans-serif;
@@ -76,40 +118,10 @@ body > header > aside > p {
   margin: 0;
 }
 
-#logout {
-  text-transform: lowercase;
-}
-
-.separator:after {
-  content: " |";
-  pointer-events: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-abbr {
-  outline: none;
-  text-decoration: none !important;
-}
-
-.sr-only, hr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  border: 0;
-}
-
 body > header a,
 body > header a:link,
 body > header a:visited {
   color: #000;
-  text-decoration: none;
 }
 
 body > header a:hover,
@@ -118,8 +130,6 @@ body > header a:focus {
   color: #fff;
   text-decoration: none;
 }
-
-
 
 main {
   background: #F6F6EF;
@@ -147,13 +157,9 @@ article > header > button {
 
 article > header > h2 a:link {
   color: #000;
-  text-decoration: none;
 }
 article > header > h2 a:visited {
   color: #828282;
-}
-article > header > h2 a:hover {
-  text-decoration: underline;
 }
 
 article .site-ref {
@@ -165,16 +171,11 @@ article .site-ref > a:visited {
   color: #828282;
 }
 
-article .site-ref > a:hover {
-  text-decoration: underline;
-}
-
 article > header {
   display: flex;
   align-items: center;
-  /* flex-direction: row; */
-  /* justify-content: flex-start; */
 }
+
 article > header > abbr {
   order: 1;
   cursor: default;
@@ -206,7 +207,6 @@ article > header > button:hover:after {
   border-bottom-color: #000;
 }
 
-
 article > footer {
   padding: 0;
   font-size: 0.7rem;
@@ -220,13 +220,6 @@ article > footer a,
 article > footer a:link,
 article > footer a:visited {
   color: #828282;
-  text-decoration: none;
-}
-
-article > footer a:hover,
-article > footer a:active,
-article > footer a:focus {
-  text-decoration: underline;
 }
 
 article > footer > .score {
@@ -260,7 +253,6 @@ article > footer > time,
 article > footer > .flag,
 article > footer > .hide,
 article > footer > .comments {
-  /*margin-right: 0.3rem;*/
   margin-right: 0.24rem;
 }
 
@@ -270,13 +262,7 @@ main > p {
 main > p > a:link,
 main > p > a:visited {
   color: #828282;
-  text-decoration: none;
 }
-
-main > p > a:hover {
-  text-decoration: underline;
-}
-
 
 body > footer {
   display: flex;
@@ -304,11 +290,7 @@ body > footer > ul > li {
 body > footer a,
 body > footer a:link,
 body > footer a:visited {
-  text-decoration: none;
   color: #000;
-}
-body > footer a:hover {
-  text-decoration: underline;
 }
 
 body > footer > form {
