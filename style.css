@@ -42,16 +42,18 @@ abbr {
   text-decoration: none !important;
 }
 
-.sr-only, hr {
+.sr-only,
+hr {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
 
 /* ///// */
 
@@ -59,16 +61,14 @@ body {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 1rem;
   color: #828282;
-  padding: 0.6rem 0;
   margin: 0 auto;
-  width: 84%;
 }
 
 body > header {
   background: #FF6600;
   color: #000;
   padding: 0.15rem 0.45rem 0.15rem 0.15rem;
-  display: flex;
+  display: block;
   width: 100%;
   align-items: center;
   line-height: 1.4rem;
@@ -116,6 +116,7 @@ body > header > nav li {
 
 body > header > aside > p {
   margin: 0;
+  text-align: right;
 }
 
 body > header a,
@@ -131,138 +132,6 @@ body > header a:focus {
   text-decoration: none;
 }
 
-main {
-  background: #F6F6EF;
-  padding: 0.73rem 0.65rem 0.68rem 0rem;
-  border-bottom: 2px solid#ff6600;
-}
-
-article {
-  margin-bottom: 0.375rem;
-}
-
-article > header > h2 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: normal;
-  order: 3;
-  /*padding-top: 0.22rem;*/
-  padding-top: 0.15rem;
-}
-
-article > header > abbr,
-article > header > button {
-  padding-top: 0.10rem;
-}
-
-article > header > h2 a:link {
-  color: #000;
-}
-article > header > h2 a:visited {
-  color: #828282;
-}
-
-article .site-ref {
-  font-size: 0.8rem;
-}
-
-article .site-ref > a:link,
-article .site-ref > a:visited {
-  color: #828282;
-}
-
-article > header {
-  display: flex;
-  align-items: center;
-}
-
-article > header > abbr {
-  order: 1;
-  cursor: default;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 1rem;
-  width: 1.655rem;
-  text-align: right;
-}
-
-article > header > button {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  margin: 0 0 -0.150004rem 0;
-  order: 2;
-  display: flex;
-}
-
-article > header > button:after {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 8px solid #999999;
-  content: " ";
-  display: inline;
-  margin: 0.2rem 0.22rem;
-}
-
-article > header > button:hover:after {
-  border-bottom-color: #000;
-}
-
-article > footer {
-  padding: 0;
-  font-size: 0.7rem;
-  margin-left: 2.7rem;
-  margin-top: 0.25rem;
-  display: flex;
-  flex-direction: row;
-}
-
-article > footer a,
-article > footer a:link,
-article > footer a:visited {
-  color: #828282;
-}
-
-article > footer > .score {
-  order: 1;
-}
-
-article > footer > .by {
-  order: 2;
-}
-
-article > footer > time {
-  order: 3;
-}
-article > footer > .flag {
-  order: 4;
-  text-transform: lowercase;
-}
-
-article > footer > .hide {
-  order: 5;
-  text-transform: lowercase;
-}
-
-article > footer > .comments {
-  order: 6;
-}
-
-article > footer > .score,
-article > footer > .by,
-article > footer > time,
-article > footer > .flag,
-article > footer > .hide,
-article > footer > .comments {
-  margin-right: 0.24rem;
-}
-
-main > p {
-  margin: 1.25rem 0 0 2.7rem;
-}
-main > p > a:link,
-main > p > a:visited {
-  color: #828282;
-}
 
 body > footer {
   display: flex;
@@ -283,6 +152,7 @@ body > footer > ul {
   text-align: center;
   font-size: 0.8rem;
 }
+
 body > footer > ul > li {
   display: inline;
 }
@@ -300,4 +170,176 @@ body > footer > form {
 body > footer > form input {
   width: 10.954rem;
   height: 1.576rem;
+}
+
+
+/** ////////// **/
+
+.articles {
+  background: #F6F6EF;
+  padding: 0.73rem 0.65rem 0.68rem 0rem;
+  border-bottom: 2px solid#ff6600;
+}
+
+.articles > article {
+  margin-bottom: 0.375rem;
+}
+
+.articles > article > header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.articles > article > header > h2 {
+  margin: 0;
+  font-size: 1.100rem;
+  font-weight: normal;
+  order: 3;
+  padding-top: 0.15rem;
+}
+
+.articles > article > header > abbr,
+.articles > article > header > button {
+  padding-top: 0.10rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.articles > article > header > h2 a:link {
+  color: #000;
+}
+
+.articles > article > header > h2 a:visited {
+  color: #828282;
+}
+
+.articles > article .site-ref {
+  font-size: 0.8rem;
+}
+
+.articles > article .site-ref > a:link,
+.articles > article .site-ref > a:visited {
+  color: #828282;
+}
+
+.articles > article > header > abbr {
+  order: 1;
+  cursor: default;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.100rem;
+  width: 1.655rem;
+  text-align: right;
+}
+
+.articles > article > header > button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0 0 -0.150004rem 0;
+  order: 2;
+  display: flex;
+}
+
+.articles > article > header > button:after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #999999;
+  content: " ";
+  display: inline;
+  margin: 0.4rem 0.22rem;
+}
+
+.articles > article > header > button:hover:after {
+  border-bottom-color: #000;
+}
+
+.articles > article > footer {
+  padding: 0;
+  font-size: 0.9005rem;
+  margin-left: 2.7rem;
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.articles > article > footer a,
+.articles > article > footer a:link,
+.articles > article > footer a:visited {
+  color: #828282;
+}
+
+.articles > article > footer > .score {
+  order: 1;
+}
+
+.articles > article > footer > .by {
+  order: 2;
+}
+
+.articles > article > footer > time {
+  order: 3;
+}
+
+.articles > article > footer > .flag {
+  order: 4;
+  text-transform: lowercase;
+}
+
+.articles > article > footer > .hide {
+  order: 5;
+  text-transform: lowercase;
+}
+
+.articles > article > footer > .comments {
+  order: 6;
+}
+
+.articles > article > footer > .score,
+.articles > article > footer > .by,
+.articles > article > footer > time,
+.articles > article > footer > .flag,
+.articles > article > footer > .hide,
+.articles > article > footer > .comments {
+  margin-right: 0.24rem;
+}
+
+.articles > p {
+  margin: 1.25rem 0 0 2.7rem;
+}
+
+.articles > p > a:link,
+.articles > p > a:visited {
+  color: #828282;
+}
+
+
+@media (min-width: 768px) {
+  body {
+    padding: 0.6rem 0;
+    width: 84%;
+  }
+
+  body > header {
+    display: flex;
+  }
+
+  .articles > article > header > h2 {
+    font-size: 1rem;
+  }
+
+  .articles > article > header > abbr {
+    font-size: 1rem;
+  }
+
+  .articles > article > footer {
+    font-size: 0.7rem;
+  }
+
+  .articles > article > header > button:after {
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 8px;
+  }
 }

@@ -2,14 +2,6 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link rel="shortcut icon" href="https://news.ycombinator.com/favicon.ico">
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://news.ycombinator.com/rss">
-
-  <title>Hacker News | Homepage (via HN Meets Modern HTML)
-  </title>
   <link data-require="normalize@6.0.0" data-semver="6.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js"></script>
@@ -42,30 +34,24 @@
       </p>
     </aside>
   </header>
-  <main class="articles">
+  <main>
     <template>
-      <article>
-        <header>
-        <h2>
-          <a href="{{url}}" target="_blank">{{title}}</a><span class="site-ref"> (<a href="#from?site={{domain}}">{{domain}}</a>)</span></h2>
-          <abbr title="current position {{position}}">
-            <span class="sr-only">position&#32;</span>{{position}}.
-          </abbr>
-          <button><span class="sr-only">upvote</span></button>
-        </header>
-        <footer>
-          <time timedate="yyyymmdd:hhmmss" class="separator"><a href="#">{{time_ago}}</a></time>
-          <span class="by">by <a href="#">{{user}}</a></span>
-          <span class="comments"><a href="item.html?id={{id}}">{{comments_count}} comments</a></span>
-          <span class="score">{{points}} points</span>
-          <a href="#" class="flag separator">Flag</a><a href="#" class="hide separator">Hide</a>
-        </footer>
-      </article>
-      <hr />
+
+
+        comments: {{comments}} <br />
+        comments_count: {{comments_count}} <br />
+        domain: {{domain}} <br />
+        id: {{id}} <br />
+        points: {{points}} <br />
+        time: {{time}} <br />
+        time_ago: {{time_ago}} <br />
+        title: {{title}} <br />
+        type: {{type}} <br />
+        url: {{url}} <br />
+        user: {{user}} <br />
+
     </template>
-    <p>
-      <a href="#">More</a>
-    </p>
+
   </main>
   <hr />
   <footer>
@@ -90,28 +76,27 @@
     </ul>
   </footer>
 
+  <script id="itemDataScript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script>
-    function display30Items(itemsArray) {
+    function renderItem(article) {
+      console.log('render', article);
 
       var templateEl = document.querySelectorAll('template')[0];
       var template = templateEl.innerHTML;
       Mustache.parse(template);
 
-      var renderedArticles = '';
+      var rendered = Mustache.render(template, article);
 
-      var items = itemsArray.slice(0, 30);
-      for (var index = 0; index < items.length; index++) {
-        var article = items[index];
-        article.position = index + 1;
-        var rendered = Mustache.render(template, article);
-        renderedArticles = renderedArticles + '\n' + rendered;
-      }
+      templateEl.insertAdjacentHTML( 'afterEnd', rendered);
+    }
 
-      templateEl.insertAdjacentHTML( 'afterEnd', renderedArticles);
-    };
+    var fetchItemData = function fetchItemData() {
+      var q = document.location.href.split('?')[1];
+      var id = /id=(\d+)/ig.exec(q)[1];
+      document.getElementById('itemDataScript').setAttribute('src', 'http://node-hnapi.herokuapp.com/item/' + id + '?callback=renderItem');
+    }();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="https://node-hnapi.herokuapp.com/news?page=1&amp;callback=display30Items"></script>
 
 </body>
 
