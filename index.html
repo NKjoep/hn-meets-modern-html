@@ -4,18 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <link rel="shortcut icon" href="https://news.ycombinator.com/favicon.ico">
   <link rel="alternate" type="application/rss+xml" title="RSS" href="https://news.ycombinator.com/rss">
 
-  <title>Hacker News | Homepage (via HN Meets Modern HTML)
-  </title>
+  <title>Hacker News | Homepage (via HN Meets Modern HTML)</title>
   <link data-require="normalize@6.0.0" data-semver="6.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="fetchHomepage()">
   <header>
     <h1>
       <a href="index.html">
@@ -27,9 +26,10 @@
       <ul>
         <li class="separator"><a href="#">new</a></li>
         <li class="separator"><a href="#">threads</a></li>
+        <li class="separator"><a href="#">past</a></li>
         <li class="separator"><a href="#">comments</a></li>
-        <li class="separator"><a href="#">show</a></li>
         <li class="separator"><a href="#">ask</a></li>
+        <li class="separator"><a href="#">show</a></li>
         <li class="separator"><a href="#">jobs</a></li>
         <li><a href="#">submit</a></li>
       </ul>
@@ -89,30 +89,6 @@
       <li><a href="#">Contact</a></li>
     </ul>
   </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script>
-    function display30Items(itemsArray) {
-
-      var templateEl = document.querySelectorAll('template')[0];
-      var template = templateEl.innerHTML;
-      Mustache.parse(template);
-
-      var renderedArticles = '';
-
-      var items = itemsArray.slice(0, 30);
-      for (var index = 0; index < items.length; index++) {
-        var article = items[index];
-        article.position = index + 1;
-        var rendered = Mustache.render(template, article);
-        renderedArticles = renderedArticles + '\n' + rendered;
-      }
-
-      templateEl.insertAdjacentHTML( 'afterEnd', renderedArticles);
-    };
-  </script>
-  <script src="https://node-hnapi.herokuapp.com/news?page=1&amp;callback=display30Items"></script>
-
 </body>
 
 </html>

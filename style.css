@@ -279,6 +279,7 @@ body > footer > form input {
   color: var(--color-gray);
 }
 
+.article > article .site-ref,
 .articles > article .site-ref {
   font-size: 0.8rem;
 }
