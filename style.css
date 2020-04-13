@@ -5,17 +5,24 @@
 html {
   font-size: 13.333px;
   margin: 0;
+  --color-brand: #FF6600;
+  --color-black: #000;
+  --color-gray: #828282;
+  --color-gray-2: #999999;
+  --color-white: #fff;
+  --color-vanilla: #F6F6EF;
+  --size-xs: 0.24rem;
 }
 
 a,
 a:link,
 a:visited {
   text-decoration: none;
-  color: #000;
+  color: var(--color-black);
 }
 
 a:visited {
-  color: #828282;
+  color: var(--color-gray);
 }
 
 a:hover,
@@ -54,24 +61,75 @@ hr {
   border: 0;
 }
 
+.btn-expand,
+.btn-arrow-up,
+.btn-arrow-down {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: inline-flex;
+  color: currentColor;
+  font-size: 1em;
+  cursor: pointer;
+  --text: "[-]";
+}
+
+.btn-expand:after {
+  content: var(--text);
+  display: inline;
+}
+
+.btn-arrow-up:after,
+.btn-arrow-down:after{
+  border-left: 0.37em solid transparent;
+  border-right: 0.37em solid transparent;
+  border-bottom: 0.74em solid var(--color-gray-2);
+  border-bottom: 0.74em solid currentColor;
+  content: " ";
+  display: inline;
+  margin: 0.4em 0.22em;
+}
+
+.btn-arrow-down:after {
+  border-top: 0.74em solid var(--color-gray-2);
+  border-top: 0.74em solid currentColor;
+  border-bottom: 0 none;
+}
+
+.btn-arrow-down:hover:after {
+  border-top-color: var(--color-black);
+}
+.btn-arrow-up:hover:after {
+  border-bottom-color: var(--color-black);
+}
+
+.text-small {
+  font-size: 0.80005rem;
+}
+
+.text-normal {
+  font-size: 0.9rem;
+}
 
 /* ///// */
 
 body {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 1rem;
-  color: #828282;
+  color: var(--color-gray);
   margin: 0 auto;
 }
 
 body > header {
-  background: #FF6600;
-  color: #000;
+  background: var(--color-brand);
+  color: var(--color-black);
   padding: 0.15rem 0.45rem 0.15rem 0.15rem;
   display: block;
   width: 100%;
   align-items: center;
   line-height: 1.4rem;
+  /* special */
+  /* border-top: 5px solid var(--color-black); */
 }
 
 body > header h1 {
@@ -94,7 +152,7 @@ body > header h1 img {
   vertical-align: middle;
   height: 1.350rem;
   width: 1.350rem;
-  border: 1px solid #fff;
+  border: 1px solid var(--color-white);
   margin-right: 0.3rem;
   box-sizing: content-box;
 }
@@ -122,13 +180,13 @@ body > header > aside > p {
 body > header a,
 body > header a:link,
 body > header a:visited {
-  color: #000;
+  color: var(--color-black);
 }
 
 body > header a:hover,
 body > header a:active,
 body > header a:focus {
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -139,7 +197,7 @@ body > footer {
   flex-direction: column-reverse;
   justify-content: flex-start;
   align-items: center;
-  background-color: #F6F6EF;
+  background-color: var(--color-vanilla);
   padding: 1.25rem 0 1rem 0;
 }
 
@@ -160,7 +218,7 @@ body > footer > ul > li {
 body > footer a,
 body > footer a:link,
 body > footer a:visited {
-  color: #000;
+  color: var(--color-black);
 }
 
 body > footer > form {
@@ -175,21 +233,25 @@ body > footer > form input {
 
 /** ////////// **/
 
+.article,
 .articles {
-  background: #F6F6EF;
+  background: var(--color-vanilla);
   padding: 0.73rem 0.65rem 0.68rem 0rem;
-  border-bottom: 2px solid#ff6600;
+  border-bottom: 2px solid var(--color-brand);
 }
 
+.article > article,
 .articles > article {
   margin-bottom: 0.375rem;
 }
 
+.article > article > header,
 .articles > article > header {
   display: flex;
   align-items: flex-start;
 }
 
+.article > article > header > h2,
 .articles > article > header > h2 {
   margin: 0;
   font-size: 1.100rem;
@@ -198,30 +260,37 @@ body > footer > form input {
   padding-top: 0.15rem;
 }
 
+.article > article > header > abbr,
 .articles > article > header > abbr,
+.article > article > header > button,
 .articles > article > header > button {
   padding-top: 0.10rem;
   flex-grow: 0;
   flex-shrink: 0;
 }
 
+.article > article > header > h2 a:link,
 .articles > article > header > h2 a:link {
-  color: #000;
+  color: var(--color-black);
 }
 
+.article > article > header > h2 a:visited,
 .articles > article > header > h2 a:visited {
-  color: #828282;
+  color: var(--color-gray);
 }
 
 .articles > article .site-ref {
   font-size: 0.8rem;
 }
 
+.article > article .site-ref > a:link,
+.article > article .site-ref > a:visited,
 .articles > article .site-ref > a:link,
 .articles > article .site-ref > a:visited {
-  color: #828282;
+  color: var(--color-gray);
 }
 
+.article > article > header > abbr,
 .articles > article > header > abbr {
   order: 1;
   cursor: default;
@@ -231,28 +300,13 @@ body > footer > form input {
   text-align: right;
 }
 
+.article > article > header > button,
 .articles > article > header > button {
-  background: transparent;
-  border: 0;
-  padding: 0;
   margin: 0 0 -0.150004rem 0;
   order: 2;
-  display: flex;
 }
 
-.articles > article > header > button:after {
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 10px solid #999999;
-  content: " ";
-  display: inline;
-  margin: 0.4rem 0.22rem;
-}
-
-.articles > article > header > button:hover:after {
-  border-bottom-color: #000;
-}
-
+.article > article > footer,
 .articles > article > footer {
   padding: 0;
   font-size: 0.9005rem;
@@ -264,45 +318,60 @@ body > footer > form input {
   white-space: nowrap;
 }
 
+.article > article > footer a,
+.article > article > footer a:link,
+.article > article > footer a:visited,
 .articles > article > footer a,
 .articles > article > footer a:link,
 .articles > article > footer a:visited {
-  color: #828282;
+  color: var(--color-gray);
 }
 
+.article > article > footer > .score,
 .articles > article > footer > .score {
   order: 1;
 }
 
+.article > article > footer > .by,
 .articles > article > footer > .by {
   order: 2;
 }
 
+.article > article > footer > time,
 .articles > article > footer > time {
   order: 3;
 }
 
+.article > article > footer > .flag,
 .articles > article > footer > .flag {
   order: 4;
   text-transform: lowercase;
 }
 
+.article > article > footer > .hide,
 .articles > article > footer > .hide {
   order: 5;
   text-transform: lowercase;
 }
 
+.article > article > footer > .comments,
 .articles > article > footer > .comments {
   order: 6;
 }
 
+.article > article > footer > .score,
+.article > article > footer > .by,
+.article > article > footer > time,
+.article > article > footer > .flag,
+.article > article > footer > .hide,
+.article > article > footer > .comments,
 .articles > article > footer > .score,
 .articles > article > footer > .by,
 .articles > article > footer > time,
 .articles > article > footer > .flag,
 .articles > article > footer > .hide,
 .articles > article > footer > .comments {
-  margin-right: 0.24rem;
+  margin-right: var(--size-xs);
 }
 
 .articles > p {
@@ -311,9 +380,120 @@ body > footer > form input {
 
 .articles > p > a:link,
 .articles > p > a:visited {
-  color: #828282;
+  color: var(--color-gray);
 }
 
+/** single article **/
+.article {
+  padding-left: 0.65rem;
+}
+
+.article > aside > ol,
+.article > article > footer,
+.article > form {
+  margin-left: 1.2rem;
+}
+
+.article > form {
+  margin-top: 1rem;
+}
+.article > form > fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.article > form textarea {
+  font-size: 1rem;
+  font-family: monospace;
+}
+.article > form button {
+  text-transform: lowercase;
+}
+
+.article > aside {
+  margin-top: 4rem;
+}
+
+.article > aside ol {
+  list-style-type: none;
+}
+
+.article > aside > ol {
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.article > aside > ol > li+li {
+  margin-top: 0.7rem;
+}
+
+.article > aside > ol > li blockquote {
+  /* background-color: red; */
+  margin: 0.35rem 0 0 0.35rem;
+  display: block;
+  width: 100%;
+  color: var(--color-black);
+}
+
+.article > aside > ol > li blockquote > * {
+  margin-top: 0;
+}
+
+.article > aside > ol > li blockquote a:link,
+.article > aside > ol > li blockquote a:visited {
+  text-decoration: underline;
+}
+
+.article > aside > ol > li blockquote a:hover,
+.article > aside > ol > li blockquote a:active,
+.article > aside > ol > li blockquote a:focus {
+  text-decoration: none;
+}
+
+.article > aside > ol > li header a:link,
+.article > aside > ol > li header a:visited,
+.article > aside > ol > li header a:hover,
+.article > aside > ol > li header a:active,
+.article > aside > ol > li header a:focus,
+.article > aside > ol > li header {
+  color: var(--color-gray);
+}
+
+.article > aside > ol > li header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.article > aside > ol > li header > * {
+  margin-right: var(--size-xs);
+}
+
+.article > aside > ol > li header .btn-arrow-up {
+  order: 1;
+}
+
+.article > aside > ol > li header .btn-arrow-down {
+  order: 2;
+}
+
+.article > aside > ol > li header .by {
+  order: 3;
+}
+.article > aside > ol > li header time {
+  order: 4
+}
+.article > aside > ol > li header .btn-expand {
+  order: 5
+}
+
+
+
+/* responsive */
 
 @media (min-width: 768px) {
   body {
@@ -325,21 +505,27 @@ body > footer > form input {
     display: flex;
   }
 
+  .article > article > header > h2,
   .articles > article > header > h2 {
     font-size: 1rem;
   }
 
+  .article > article > header > abbr,
   .articles > article > header > abbr {
     font-size: 1rem;
   }
 
-  .articles > article > footer {
-    font-size: 0.7rem;
-  }
-
+  .article > article > header > button:after,
   .articles > article > header > button:after {
     border-left-width: 4px;
     border-right-width: 4px;
     border-bottom-width: 8px;
   }
+
+  .article > form,
+  .article > article > footer,
+  .articles > article > footer {
+    font-size: 0.7rem;
+  }
+
 }

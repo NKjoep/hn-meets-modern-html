@@ -3,7 +3,7 @@
 
 <head>
   <link data-require="normalize@6.0.0" data-semver="6.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
   <script src="script.js"></script>
 </head>
 
@@ -34,26 +34,86 @@
       </p>
     </aside>
   </header>
-  <main>
+  <main class="article">
     <template>
+      <article>
+        <header>
+          <h2>
+            <a href="{{url}}" target="_blank">{{title}}</a><span class="site-ref"> (<a href="#from?site={{domain}}">{{domain}}</a>)</span></h2>
+            <!-- <abbr title="current position {{position}}">
+              <span class="sr-only">position&#32;</span>{{position}}.
+            </abbr> -->
+            <button class="btn-arrow-up"><span class="sr-only">upvote</span></button>
+          </header>
+          <footer>
+            <time timedate="{{time}}" title="{{time}}" class="separator"><a href="#">{{time_ago}}</a></time>
+            <span class="by">by <a href="#">{{user}}</a></span>
+            <span class="comments"><a href="item.html?id={{id}}">{{comments_count}} comments</a></span>
+            <span class="score">{{points}} points</span>
+            <a href="#" class="flag separator">Flag</a><a href="#" class="hide separator">Hide</a>
+          </footer>
+      </article>
 
+      <hr>
 
-        comments: {{comments}} <br />
-        comments_count: {{comments_count}} <br />
-        domain: {{domain}} <br />
-        id: {{id}} <br />
-        points: {{points}} <br />
-        time: {{time}} <br />
-        time_ago: {{time_ago}} <br />
-        title: {{title}} <br />
-        type: {{type}} <br />
-        url: {{url}} <br />
-        user: {{user}} <br />
+      <form>
+        <fieldset>
+          <legend  class="sr-only">Comment on "{{title}}"</legend>
+          <label>
+            <span  class="sr-only">Comment text</span>
+            <textarea id="comment" name="text" rows="6" cols="60"></textarea>
+          </label>
+          <p>
+            <button>Add comment</button>
+          </p>
+        </fieldset>
+      </form>
 
+      <aside>
+        <ol data-comments-id="c-{{id}}">
+          {{#comments}}
+            {{> partial_comments}}
+          {{/comments}}
+        </ol>
+      </aside>
     </template>
 
+    <template data-mustache="partial_comments">
+      <li>
+        <header class="text-small">
+          <time timedate="{{time}}" title="{{time}}"><a href="#">{{time_ago}}</a></time>
+          <span class="by">by <a href="#">{{user}}</a></span>
+          <button aria-pressed="false" class="btn-expand" data-toggler-id="c-{{id}}" onclick="toggleComment('c-{{id}}', {{comments.length}})"><span class="sr-only">collapse</span></button>
+          <button class="btn-arrow-up"><span class="sr-only">upvote</span></button>
+          <button class="btn-arrow-down"><span class="sr-only">downvote</span></button>
+        </header>
+
+        <blockquote class="text-normal" data-blockquote-id="c-{{id}}">
+          {{{content}}}
+        </blockquote>
+
+        <ol data-comments-id="c-{{id}}">
+          {{#comments}}
+          {{> partial_comments}}
+          {{/comments}}
+        </ol>
+      </li>
+      <!-- comments: {{comments.length}} <br />
+      comments_count: {{comments_count}} <br />
+      domain: {{domain}} <br />
+      id: {{id}} <br />
+      points: {{points}} <br />
+      time: {{time}} <br />
+      time_ago: {{time_ago}} <br />
+      title: {{title}} <br />
+      type: {{type}} <br />
+      url: {{url}} <br />
+      user: {{user}} <br /> -->
+    </template>
   </main>
+
   <hr />
+
   <footer>
     <form action="#">
       <label>
@@ -82,13 +142,16 @@
     function renderItem(article) {
       console.log('render', article);
 
-      var templateEl = document.querySelectorAll('template')[0];
-      var template = templateEl.innerHTML;
-      Mustache.parse(template);
+      var templateEl = document.querySelector('template');
+      var template = templateEl.innerHTML.replace(/\{\{&gt;/g, '{{>');
 
-      var rendered = Mustache.render(template, article);
+      var templateComments = document.body.querySelector('template[data-mustache="partial_comments"]').innerHTML.replace(/\{\{&gt;/g, '{{>');
 
-      templateEl.insertAdjacentHTML( 'afterEnd', rendered);
+      var rendered = Mustache.render(template, article, {
+        partial_comments: templateComments
+      });
+
+      templateEl.insertAdjacentHTML('afterEnd', rendered);
     }
 
     var fetchItemData = function fetchItemData() {
@@ -96,6 +159,39 @@
       var id = /id=(\d+)/ig.exec(q)[1];
       document.getElementById('itemDataScript').setAttribute('src', 'http://node-hnapi.herokuapp.com/item/' + id + '?callback=renderItem');
     }();
+  </script>
+  <script>
+    function toggleComment(id, comments_count) {
+      var $blockquote = document.querySelector('[data-blockquote-id="' + id + '"]');
+      var $comments = document.querySelector('[data-comments-id="' + id + '"]');
+
+      var functionToggle = function($el) {
+        var displayValue = window.getComputedStyle($el).display;
+        console.log('toggle', id, displayValue);
+        if (displayValue !== 'none') {
+          $el.setAttribute('data-comment-display', displayValue);
+          $el.style.display = 'none';
+          return;
+        }
+        displayValue = $el.getAttribute('data-comment-display');
+        $el.style.display = displayValue;
+      }
+
+      // toggle elements
+      functionToggle($blockquote);
+      functionToggle($comments);
+
+      // toggle toggler text
+      var $toggler = document.querySelector('[data-toggler-id="' + id + '"]');
+      var collapseString = '"[-]"';
+      var attributeName = '--text';
+      var t = window.getComputedStyle($toggler).getPropertyValue(attributeName).trim();
+      if (t === collapseString) {
+        $toggler.style.setProperty(attributeName, `"[+${comments_count+1}]"`);
+      } else {
+        $toggler.style.setProperty(attributeName, collapseString);
+      }
+    }
   </script>
 
 </body>

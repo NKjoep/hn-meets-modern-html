@@ -51,10 +51,10 @@
           <abbr title="current position {{position}}">
             <span class="sr-only">position&#32;</span>{{position}}.
           </abbr>
-          <button><span class="sr-only">upvote</span></button>
+          <button class="btn-arrow-up"><span class="sr-only">upvote</span></button>
         </header>
         <footer>
-          <time timedate="yyyymmdd:hhmmss" class="separator"><a href="#">{{time_ago}}</a></time>
+          <time timedate="{{time}}" title ="{{time}}" class="separator"><a href="#">{{time_ago}}</a></time>
           <span class="by">by <a href="#">{{user}}</a></span>
           <span class="comments"><a href="item.html?id={{id}}">{{comments_count}} comments</a></span>
           <span class="score">{{points}} points</span>
@@ -90,6 +90,7 @@
     </ul>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script>
     function display30Items(itemsArray) {
 
@@ -110,7 +111,6 @@
       templateEl.insertAdjacentHTML( 'afterEnd', renderedArticles);
     };
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="https://node-hnapi.herokuapp.com/news?page=1&amp;callback=display30Items"></script>
 
 </body>
