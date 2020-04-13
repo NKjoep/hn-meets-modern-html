@@ -8,5 +8,5 @@ The idea is to try to reproduce the hacker news pages with semantic markup and p
 
 Have a look at the code, I used:
 
-- mustache.js as a template engine
+- [mustache.js](https://github.com/janl/mustache.js) as template engine
 - [node-hnap, Unofficial Hacker News API](https://github.com/cheeaun/node-hnapi)
