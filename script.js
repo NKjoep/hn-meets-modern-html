@@ -28,7 +28,7 @@ function fetchItemData() {
   var q = document.location.href.split('?')[1];
   var id = /id=(\d+)/ig.exec(q)[1];
   var script = document.createElement('script');
-  script.src = 'http://node-hnapi.herokuapp.com/item/' + id + '?callback=renderItem';
+  script.src = 'https://node-hnapi.herokuapp.com/item/' + id + '?callback=renderItem';
   document.head.appendChild(script);
 }
 
